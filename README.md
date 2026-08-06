@@ -29,7 +29,7 @@ HSegFormer consists of four main components:
 ## Overall Architecture
 
 <p align="center">
-<img src="docs/Proposed.png" width="1000">
+<img src="docs/Proposed.png" width="100">
 </p>
 
 ---
@@ -37,7 +37,7 @@ HSegFormer consists of four main components:
 ## Normalization Attention Block (NABlock)
 
 <p align="center">
-<img src="docs/NBock.png" width="700">
+<img src="docs/NBock.png" width="100">
 </p>
 
 The proposed **NABlock** is a lightweight feature refinement module that combines:
@@ -55,7 +55,7 @@ This design enhances feature discrimination while introducing only a small compu
 ## Attention Gate (At-G)
 
 <p align="center">
-<img src="docs/At_G.png" width="750">
+<img src="docs/At_G.png" width="100">
 </p>
 
 The proposed **Attention Gate (At-G)** selectively filters encoder skip features using the upsampled decoder feature as a gating signal. The refined features are then forwarded to the decoder, allowing the network to suppress irrelevant background responses while preserving informative tumor-related structures during progressive decoding.
