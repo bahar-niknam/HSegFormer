@@ -1,1 +1,1 @@
-# HSegFormer+ architectur
+# HSegFormer architectur
