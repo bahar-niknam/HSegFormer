@@ -1,1 +1,0 @@
-# HSegFormer architectur
