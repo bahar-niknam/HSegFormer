@@ -90,8 +90,8 @@ This repository currently provides:
 
 ## Paper
 
-The manuscript is currently under review.
-Citation information will be added after publication.
+- The manuscript is currently under review.
+- Citation information will be added after publication.
 ---
 
 ## Contact
