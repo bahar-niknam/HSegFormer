@@ -1,53 +1,64 @@
 # HSegFormer
 
-Official implementation of **HSegFormer**, a hybrid CNN–Transformer framework for brain tumor segmentation in contrast-enhanced T1-weighted magnetic resonance imaging (MRI).
+## Introduction
+
+HSegFormer is a hybrid CNN–Transformer framework for brain tumor segmentation from contrast-enhanced T1-weighted MRI. The model combines the local representation capability of convolutional neural networks with the global contextual modeling of hierarchical vision transformers. To improve feature learning, HSegFormer incorporates multi-scale feature fusion, stage-wise attention-guided decoding, and deep supervision, while maintaining computational efficiency.
+
+This repository contains the official implementation of the architecture presented in the accompanying manuscript.
 
 ---
 
-## Overview
+## Method Overview
 
-HSegFormer+ is a hybrid semantic segmentation framework designed for automatic brain tumor segmentation from contrast-enhanced T1-weighted MRI. The proposed architecture combines convolutional neural networks and hierarchical vision transformers to jointly exploit local spatial representations and global contextual information.
+HSegFormer consists of four main components:
 
-The network consists of:
+### 1. Hybrid Encoder
+- Parallel **ResNet-50** and **SegFormer** backbones extract complementary local and global feature representations at multiple spatial resolutions.
 
-- Hybrid CNN–Transformer encoder
-- Multi-scale CNN–Transformer feature fusion
-- Normalization Attention Block (NABlock)
-- Attention-guided decoder
-- Atrous Spatial Pyramid Pooling (ASPP)
-- Deep supervision during training
+### 2. Multi-scale Feature Fusion
+- Features from both encoder branches are projected into a common embedding space, concatenated, and refined using the proposed **Normalization Attention Block (NABlock)** to produce hierarchical fused representations.
+
+### 3. Attention-guided Decoder
+- A coarse-to-fine decoder progressively reconstructs the segmentation map. At each decoding stage, **Attention Gates (At-G)** use the upsampled decoder feature as a gating signal to selectively refine the corresponding encoder skip feature before further refinement with NABlock.
+
+### 4. Prediction Head
+- An **Atrous Spatial Pyramid Pooling (ASPP)** module aggregates multi-scale contextual information, followed by a $1 \times 1$ convolution to generate the final binary segmentation mask.
 
 ---
 
-## Architecture
-
-### Overall HSegFormer Architecture
+## Overall Architecture
 
 <p align="center">
 <img src="docs/Proposed.png" width="1000">
 </p>
 
-The proposed architecture consists of a dual-path hybrid encoder based on **ResNet-50** and **SegFormer**, followed by multi-scale feature fusion, an attention-guided decoder, ASPP refinement, and a binary segmentation head.
-
 ---
 
-### Normalization Attention Block (NABlock)
+## Normalization Attention Block (NABlock)
 
 <p align="center">
 <img src="docs/NBock.png" width="700">
 </p>
 
-The NABlock combines depthwise separable convolution, Group Normalization, GELU activation, and a Squeeze-and-Excitation (SE) module for lightweight feature refinement and channel-wise attention.
+The proposed **NABlock** is a lightweight feature refinement module that combines:
+
+- Depthwise separable convolution
+- Pointwise convolution
+- Group Normalization
+- GELU activation
+- Squeeze-and-Excitation (SE) channel attention
+
+This design enhances feature discrimination while introducing only a small computational overhead.
 
 ---
 
-### Attention Gate (At-G)
+## Attention Gate (At-G)
 
 <p align="center">
 <img src="docs/At_G.png" width="750">
 </p>
 
-The Attention Gate suppresses irrelevant encoder features using decoder guidance before skip connections are fused within the decoder.
+The proposed **Attention Gate (At-G)** selectively filters encoder skip features using the upsampled decoder feature as a gating signal. The refined features are then forwarded to the decoder, allowing the network to suppress irrelevant background responses while preserving informative tumor-related structures during progressive decoding.
 
 ---
 
@@ -57,7 +68,6 @@ The Attention Gate suppresses irrelevant encoder features using decoder guidance
 HSegFormer/
 │
 ├── README.md
-│
 ├── docs/
 │   ├── Proposed.png
 │   ├── NBlock.png
@@ -69,36 +79,26 @@ HSegFormer/
 
 ---
 
-## Model Components
+## Repository Contents
 
-The implementation includes:
+This repository currently provides:
 
-- Hybrid CNN–Transformer encoder
-- Feature projection and multi-scale fusion
-- Normalization Attention Block (NABlock)
-- Attention Gate (At-G)
-- ASPP module
-- Attention-guided decoder
-- Deep supervision outputs
+- Source code of the HSegFormer architecture
+- Architectural diagrams
+- Documentation describing the proposed framework
+
+Training scripts, pretrained weights, and additional resources are not included in the current version of the repository.
 
 ---
 
 ## Paper
 
-**HSegFormer: A Hybrid CNN–Transformer Framework for Brain Tumor Segmentation in Contrast-Enhanced T1-Weighted MRI**
+**HSegFormer: Hybrid CNN–Transformer With Stage Attention for Brain Tumor MRI Segmentation**
 
-*Citation information will be added after publication.*
-
----
-
-## Repository Status
-
-This repository currently provides the implementation of the HSegFormer+ architecture described in the accompanying manuscript.
-
-Additional resources may be added in future updates.
+Citation information will be added after publication.
 
 ---
 
 ## Contact
 
-For questions regarding the implementation, please open a GitHub Issue.
+Questions and feedback are welcome through the GitHub Issues page.
