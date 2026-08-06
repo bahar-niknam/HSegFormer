@@ -86,17 +86,12 @@ This repository currently provides:
 - Source code of the HSegFormer architecture
 - Architectural diagrams
 - Documentation describing the proposed framework
-
-Training scripts, pretrained weights, and additional resources are not included in the current version of the repository.
-
 ---
 
 ## Paper
 
-**HSegFormer: Hybrid CNN–Transformer With Stage Attention for Brain Tumor MRI Segmentation**
-
+The manuscript is currently under review.
 Citation information will be added after publication.
-
 ---
 
 ## Contact
